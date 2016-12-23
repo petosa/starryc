@@ -4,18 +4,12 @@
 <statement>::=<rotate><statement>
 <statement>::=<pop><statement>
 <statement>::=<push><statement>
-<statement>::=<add><statement>
-<statement>::=<sub><statement>
-<statement>::=<mult><statement>
-<statement>::=<div><statement>
-<statement>::=<mod><statement>
-<statement>::=<print-num><statement>
-<statement>::=<print-ascii><statement>
-<statement>::=<read-num><statement>
-<statement>::=<read-ascii><statement>
+<statement>::=<star-expr><statement>
+<statement>::=<print-expr><statement>
+<statement>::=<read-expr><statement>
 <statement>::=<label><statement>
 <statement>::=<branch><statement>
-<statement>::=NULL
+<statement>::=$
 
 <dup>::=<space><plus>
 <swap>::=<space><space><plus>
@@ -25,23 +19,29 @@
 <push-tail>::=<space><push-tail>
 <push-tail>::=<plus>
 
-<star-mod-space>::=<space><space><space><space><space><star-mod-space>
-<star-mod-space>::=NULL
-<add>::=<star-mod-space><star>
-<sub>::=<star-mod-space><space><star>
-<mult>::=<star-mod-space><space><space><star>
-<div>::=<star-mod-space><space><space><space><star>
-<mod>::=<star-mod-space><space><space><space><space><star>
+<star-expr>::=<space><space><space><space><space><star-expr>
+<star-expr>::=<add>
+<star-expr>::=<sub>
+<star-expr>::=<mult>
+<star-expr>::=<div>
+<star-expr>::=<mod>
+<add>::=<star>
+<sub>::=<space><star>
+<mult>::=<space><space><star>
+<div>::=<space><space><space><star>
+<mod>::=<space><space><space><space><star>
 
-<dot-mod-space>::=<space><space><dot-mod-space>
-<dot-mod-space>::=NULL
-<print-num>::=<dot-mod-space><dot>
-<print-ascii>::=<dot-mod-space><space><dot>
+<print-expr>::=<space><space><print-expr>
+<print-expr>::=<print-num>
+<print-expr>::=<print-ascii>
+<print-num>::=<dot>
+<print-ascii>::=<space><dot>
 
-<comma-mod-space>::=<space><space><comma-mod-space>
-<comma-mod-space>::=NULL
-<read-num>::=<comma-mod-space><comma>
-<read-ascii>::=<comma-mod-space><space><comma>
+<read-expr>::=<space><space><read-expr>
+<read-expr>::=<read-num>
+<read-expr>::=<read-ascii>
+<read-num>::=<comma>
+<read-ascii>::=<space><comma>
 
 <label>::=<space><label>
 <label>::=<grave>
