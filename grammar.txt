@@ -1,15 +1,15 @@
 <starry-program>::=<statement>
-<statement>::=<dup><statement>
-<statement>::=<swap><statement>
-<statement>::=<rotate><statement>
-<statement>::=<pop><statement>
-<statement>::=<push><statement>
-<statement>::=<star-expr><statement>
-<statement>::=<print-expr><statement>
-<statement>::=<read-expr><statement>
-<statement>::=<label><statement>
-<statement>::=<branch><statement>
-<statement>::=$
+<statement>::=<expr><statement>
+<expr>::=<dup>
+<expr>::=<swap>
+<expr>::=<rotate>
+<expr>::=<pop>
+<expr>::=<push>
+<expr>::=<star-expr>
+<expr>::=<print-expr>
+<expr>::=<read-expr>
+<expr>::=<label>
+<expr>::=<branch>
 
 <dup>::=<space><plus>
 <swap>::=<space><space><plus>
