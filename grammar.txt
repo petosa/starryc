@@ -1,5 +1,6 @@
-<starry-program>::=<statement>
-<statement>::=<expr><statement>
+<starry-program>::=<expr-list>
+<expr-list>::=<expr><expr-list>
+<expr-list>::=NULL
 <expr>::=<dup>
 <expr>::=<swap>
 <expr>::=<rotate>
