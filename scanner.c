@@ -14,8 +14,11 @@ int main(int argc, char *argv[]) {
   // Pull parse table matrix into memory.
   FILE *parse_table = fopen("parse-table.csv", "r");
   int c;
-  char **matrix = malloc(NUM_ROWS * sizeof(char **));
-  char *row = malloc(NUM_ROWS * sizeof(char *));
+  char ***matrix = malloc(NUM_COLS * sizeof(char **));
+  printf("Created %d columns.\n", NUM_COLS);
+  for (int i = 0; i < NUM_COLS; i++) {
+    matrix[i] = malloc(NUM_ROWS * sizeof(char **));
+  }
   int current_col = 0;
   int current_row = 0;
 
@@ -24,7 +27,7 @@ int main(int argc, char *argv[]) {
     char *buffer = calloc(MAX_CELL_SIZE, sizeof(char));
     while ((c = getc(parse_table)) != EOF) {
       if (c == ',' || c == '\n') {
-        printf("matrix[%d,%d] = %s\n", current_col, current_row, buffer);
+        matrix[current_col][current_row] = buffer;
         if (c == ',') {
           current_col++;
         } else if (c == '\n') {
@@ -42,6 +45,14 @@ int main(int argc, char *argv[]) {
   } else {
     printf("Parse table not found.\n");
     exit(1);
+  }
+
+  for (int i = 0; i < NUM_ROWS; i++) {
+    printf("ROW NUMBER %d.\n", i);
+    for (int j = 0; j < NUM_COLS; j++) {
+      printf("COL NUMBER %d.\n", j);
+      printf(">%s<\n", matrix[j][i]);
+    }
   }
 
   // Scan through source file.
