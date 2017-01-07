@@ -1,0 +1,55 @@
+/* This formatted grammar can be fed into http://zaa.ch/jison/try/usf/ to generate
+ an SLR(1) parse table. */
+
+%%
+
+starry-program : expr-list;
+expr-list : expr expr-list | ;
+expr : dup;
+expr : swap;
+expr : rotate;
+expr : pop;
+expr : push;
+expr : star-expr;
+expr : print-expr;
+expr : read-expr;
+expr : label;
+expr : branch;
+
+dup : SPACE PLUS;
+swap : SPACE SPACE PLUS;
+rotate : SPACE SPACE SPACE PLUS;
+pop : SPACE SPACE SPACE SPACE PLUS;
+push : SPACE SPACE SPACE SPACE SPACE push-tail;
+push-tail : SPACE push-tail;
+push-tail : PLUS;
+
+star-expr : SPACE SPACE SPACE SPACE SPACE star-expr;
+star-expr : add;
+star-expr : sub;
+star-expr : mult;
+star-expr : div;
+star-expr : mod;
+add : STAR;
+sub : SPACE STAR;
+mult : SPACE SPACE STAR;
+div : SPACE SPACE SPACE STAR;
+mod : SPACE SPACE SPACE SPACE STAR;
+
+print-expr : SPACE SPACE print-expr;
+print-expr : print-num;
+print-expr : print-ascii;
+print-num : DOT;
+print-ascii : SPACE DOT;
+
+read-expr : SPACE SPACE read-expr;
+read-expr : read-num;
+read-expr : read-ascii;
+read-num : COMMA;
+read-ascii : SPACE COMMA;
+
+label : SPACE label;
+label : GRAVE;
+
+branch : SPACE branch;
+branch : PRIME;

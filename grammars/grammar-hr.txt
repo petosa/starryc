@@ -1,6 +1,8 @@
+// A human-readable grammar for Starry.
+
 <starry-program>::=<expr-list>
 <expr-list>::=<expr><expr-list>
-<expr-list>::=NULL
+<expr-list>::=""
 <expr>::=<dup>
 <expr>::=<swap>
 <expr>::=<rotate>
@@ -50,10 +52,10 @@
 <branch>::=<space><branch>
 <branch>::=<prime>
 
-<space>::= 
-<plus>::=+
-<star>::=*
-<dot>::=.
-<comma>::=,
-<grave>::=`
-<prime>::='
+<space>::=" "
+<plus>::="+"
+<star>::="*"
+<dot>::="."
+<comma>::=","
+<grave>::="`"
+<prime>::="'"

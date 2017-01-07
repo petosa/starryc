@@ -1,0 +1,46 @@
+1. $accept→starry-program $end
+2. starry-program→expr-list
+3. expr-list→expr expr-list
+4. expr-list→
+5. expr→dup
+6. expr→swap
+7. expr→rotate
+8. expr→pop
+9. expr→push
+10. expr→star-expr
+11. expr→print-expr
+12. expr→read-expr
+13. expr→label
+14. expr→branch
+15. dup→SPACE PLUS
+16. swap→SPACE SPACE PLUS
+17. rotate→SPACE SPACE SPACE PLUS
+18. pop→SPACE SPACE SPACE SPACE PLUS
+19. push→SPACE SPACE SPACE SPACE SPACE push-tail
+20. push-tail→SPACE push-tail
+21. push-tail→PLUS
+22. star-expr→SPACE SPACE SPACE SPACE SPACE star-expr
+23. star-expr→add
+24. star-expr→sub
+25. star-expr→mult
+26. star-expr→div
+27. star-expr→mod
+28. add→STAR
+29. sub→SPACE STAR
+30. mult→SPACE SPACE STAR
+31. div→SPACE SPACE SPACE STAR
+32. mod→SPACE SPACE SPACE SPACE STAR
+33. print-expr→SPACE SPACE print-expr
+34. print-expr→print-num
+35. print-expr→print-ascii
+36. print-num→DOT
+37. print-ascii→SPACE DOT
+38. read-expr→SPACE SPACE read-expr
+39. read-expr→read-num
+40. read-expr→read-ascii
+41. read-num→COMMA
+42. read-ascii→SPACE COMMA
+43. label→SPACE label
+44. label→GRAVE
+45. branch→SPACE branch
+46. branch→PRIME
