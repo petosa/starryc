@@ -1,63 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "scanner.h"
+#include "global.h"
+#include "error.h"
 
-int main(int argc, char *argv[]) {
+extern token_t * get_token() {
+  int MAX_ERROR_SIZE = 256;
+  char c = getc(SOURCE_FILE);
+  char *message;
 
-  // Check for file existence.
-  FILE *file = fopen(argv[1], "r");
-  if (!file) {
-    printf("File not found.\n");
-    exit(1);
+  int line_col = 0;
+  int line_row = 0;
+
+  token_t *token = malloc(sizeof(token_t));
+
+  switch(c) {
+    case ' ':
+      token->type = SPACE;
+      printf("SPACE");
+    break;
+    case '.':
+      printf("DOT");
+    break;
+    case '+':
+      printf("PLUS");
+    break;
+    case '*':
+      printf("STAR");
+    break;
+    case ',':
+      printf("COMMA");
+    break;
+    case '\'':
+      printf("PRIME");
+    break;
+    case '`':
+      printf("GRAVE");
+    break;
+    case '\n':
+      line_row++;
+      line_col = -1;
+    break;
+    default:
+      message = malloc(sizeof(char) * MAX_ERROR_SIZE);
+      sprintf(message, "lexical error: line %d column %d: invalid token (%c)", line_row, line_col, c);
+      add_error(message);
+    break;
   }
+  line_col++;
 
-  // Pull parse table matrix into memory.
-  FILE *parse_table = fopen("parse-table.csv", "r");
-  int c;
-  char ***matrix = malloc(NUM_COLS * sizeof(char **));
-  printf("Created %d columns.\n", NUM_COLS);
-  for (int i = 0; i < NUM_COLS; i++) {
-    matrix[i] = malloc(NUM_ROWS * sizeof(char **));
-  }
-  int current_col = 0;
-  int current_row = 0;
+  return token;
 
-  if (parse_table) {
-    int buffer_index = 0;
-    char *buffer = calloc(MAX_CELL_SIZE, sizeof(char));
-    while ((c = getc(parse_table)) != EOF) {
-      if (c == ',' || c == '\n') {
-        matrix[current_col][current_row] = buffer;
-        if (c == ',') {
-          current_col++;
-        } else if (c == '\n') {
-          current_col = 0;
-          current_row++;
-        }
-        buffer_index = 0;
-        buffer = calloc(MAX_CELL_SIZE, sizeof(char));
-      } else {
-        buffer[buffer_index] = c;
-        buffer_index++;
-      }
-    }
-    fclose(parse_table);
-  } else {
-    printf("Parse table not found.\n");
-    exit(1);
-  }
-
-  for (int i = 0; i < NUM_ROWS; i++) {
-    printf("ROW NUMBER %d.\n", i);
-    for (int j = 0; j < NUM_COLS; j++) {
-      printf("COL NUMBER %d.\n", j);
-      printf(">%s<\n", matrix[j][i]);
-    }
-  }
-
-  // Scan through source file.
-  while ((c = getc(file)) != EOF) {
-    putchar(c);
-  }
-  fclose(file);
 }
