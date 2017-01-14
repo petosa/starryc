@@ -8,7 +8,9 @@ typedef enum {
     DOT,
     COMMA,
     PRIME,
-    GRAVE
+    GRAVE,
+    NL,
+    END
 } token_type_t;
 
 typedef struct token {

@@ -3,9 +3,9 @@
 #include "scanner.h"
 #include "global.h"
 #include "error.h"
+#include "defaults.h"
 
 extern token_t * get_token() {
-  int MAX_ERROR_SIZE = 256;
   char c = getc(SOURCE_FILE);
   char *message;
 
@@ -17,29 +17,41 @@ extern token_t * get_token() {
   switch(c) {
     case ' ':
       token->type = SPACE;
-      printf("SPACE");
+      printf("SPACE ");
     break;
     case '.':
-      printf("DOT");
+      token->type = DOT;
+      printf("DOT ");
     break;
     case '+':
-      printf("PLUS");
+      token->type = PLUS;
+      printf("PLUS ");
     break;
     case '*':
-      printf("STAR");
+      token->type = STAR;
+      printf("STAR ");
     break;
     case ',':
-      printf("COMMA");
+      token->type = COMMA;
+      printf("COMMA ");
     break;
     case '\'':
-      printf("PRIME");
+      token->type = PRIME;
+      printf("PRIME ");
     break;
     case '`':
-      printf("GRAVE");
+      token->type = GRAVE;
+      printf("GRAVE ");
     break;
     case '\n':
+      token->type = NL;
       line_row++;
       line_col = -1;
+      printf("NL ");
+    break;
+    case -1:
+      token->type = END;
+      printf("EOF");
     break;
     default:
       message = malloc(sizeof(char) * MAX_ERROR_SIZE);

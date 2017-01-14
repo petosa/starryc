@@ -3,6 +3,7 @@
 #include "global.h"
 #include "error.h"
 #include "scanner.h"
+#include "parser.h"
 #include "defaults.h"
 #include "defaults.c"
 
@@ -55,11 +56,14 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
+  start_parse(parse_table);
+
+/*
   token_t *tok = get_token();
   if (tok->type == SPACE) {
     printf("yes");
   }
-
+*/
 
   fclose(SOURCE_FILE);
 
